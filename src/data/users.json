@@ -1,0 +1,26 @@
+[
+  {
+    "id": "user-1",
+    "email": "demo@marlbtime.com",
+    "password": "123456",
+    "name": "Usuario Demo",
+    "phone": "5491123456789",
+    "role": "buyer"
+  },
+  {
+    "id": "user-2",
+    "email": "vendedor@marlbtime.com",
+    "password": "123456",
+    "name": "Carlos Vendedor",
+    "phone": "5491198765432",
+    "role": "seller"
+  },
+  {
+    "id": "user-3",
+    "email": "admin@marlbtime.com",
+    "password": "123456",
+    "name": "Admin Marlbtime",
+    "phone": "5491100000000",
+    "role": "admin"
+  }
+]

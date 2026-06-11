@@ -1,0 +1,93 @@
+[
+  {
+    "id": "ord-1",
+    "type": "venta",
+    "customer": "Matías R.",
+    "productTitle": "Placa de Video RTX 4070 Super 12GB",
+    "productId": "prod-1",
+    "quantity": 1,
+    "amount": 899999,
+    "status": "completado",
+    "date": "2026-06-05T15:00:00.000Z"
+  },
+  {
+    "id": "ord-2",
+    "type": "venta",
+    "customer": "Julián A.",
+    "productTitle": "Notebook Gamer Lenovo LOQ",
+    "productId": "prod-5",
+    "quantity": 1,
+    "amount": 1299999,
+    "status": "enviado",
+    "date": "2026-06-08T12:00:00.000Z"
+  },
+  {
+    "id": "ord-3",
+    "type": "compra",
+    "customer": "Marlbtime Store",
+    "productTitle": "Lote placas RTX 4060 (x10)",
+    "productId": "prod-1",
+    "quantity": 10,
+    "amount": 6500000,
+    "status": "confirmado",
+    "date": "2026-06-03T09:30:00.000Z",
+    "supplierId": "sup-1"
+  },
+  {
+    "id": "ord-4",
+    "type": "venta",
+    "customer": "Federico L.",
+    "productTitle": "Teclado Mecánico Redragon K552",
+    "productId": "prod-3",
+    "quantity": 1,
+    "amount": 89999,
+    "status": "pendiente",
+    "date": "2026-06-10T08:00:00.000Z"
+  },
+  {
+    "id": "ord-5",
+    "type": "venta",
+    "customer": "Ana M.",
+    "productTitle": "Procesador AMD Ryzen 7 7800X3D",
+    "productId": "prod-2",
+    "quantity": 1,
+    "amount": 549999,
+    "status": "confirmado",
+    "date": "2026-06-09T17:30:00.000Z"
+  },
+  {
+    "id": "ord-6",
+    "type": "compra",
+    "customer": "Marlbtime Store",
+    "productTitle": "Periféricos Logitech (lote)",
+    "productId": "prod-7",
+    "quantity": 25,
+    "amount": 1200000,
+    "status": "completado",
+    "date": "2026-05-28T14:00:00.000Z",
+    "supplierId": "sup-2"
+  },
+  {
+    "id": "ord-7",
+    "type": "venta",
+    "customer": "Carolina S.",
+    "productTitle": "Auriculares Gamer HyperX Cloud II",
+    "productId": "prod-4",
+    "quantity": 2,
+    "amount": 179998,
+    "status": "cancelado",
+    "date": "2026-06-01T10:00:00.000Z"
+  },
+  {
+    "id": "ord-8",
+    "type": "compra",
+    "customer": "Marlbtime Store",
+    "productTitle": "Notebooks Asus TUF (x5)",
+    "productId": "prod-5",
+    "quantity": 5,
+    "amount": 5800000,
+    "status": "enviado",
+    "date": "2026-06-07T11:00:00.000Z",
+    "supplierId": "sup-3"
+  }
+]

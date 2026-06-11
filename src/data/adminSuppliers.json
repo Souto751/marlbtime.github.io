@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sup-1",
+    "name": "TechDistrib SA",
+    "contact": "Roberto Fernández",
+    "email": "ventas@techdistrib.com.ar",
+    "phone": "5491145678901",
+    "categories": ["Componentes PC", "Placas de Video"],
+    "status": "activo",
+    "notes": "Entrega en 48-72hs CABA y GBA"
+  },
+  {
+    "id": "sup-2",
+    "name": "Periféricos del Sur",
+    "contact": "Laura Giménez",
+    "email": "compras@perifericosur.com",
+    "phone": "5492214567890",
+    "categories": ["Periféricos", "Accesorios"],
+    "status": "activo",
+    "notes": "Mínimo de pedido $500.000"
+  },
+  {
+    "id": "sup-3",
+    "name": "Notebooks Mayorista",
+    "contact": "Pablo Ruiz",
+    "email": "pablo@notebooksmayorista.com",
+    "phone": "5493519876543",
+    "categories": ["Notebooks"],
+    "status": "activo"
+  },
+  {
+    "id": "sup-4",
+    "name": "Importadora Gaming Pro",
+    "contact": "Valentina Díaz",
+    "email": "info@gamingpro.com.ar",
+    "phone": "5492613456789",
+    "categories": ["Consolas", "Accesorios"],
+    "status": "inactivo",
+    "notes": "Sin stock hasta julio 2026"
+  }
+]

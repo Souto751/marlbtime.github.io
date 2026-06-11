@@ -1,0 +1,8 @@
+[
+  { "month": "Ene", "sales": 4200000, "purchases": 2800000 },
+  { "month": "Feb", "sales": 5100000, "purchases": 3200000 },
+  { "month": "Mar", "sales": 4800000, "purchases": 3500000 },
+  { "month": "Abr", "sales": 6200000, "purchases": 4100000 },
+  { "month": "May", "sales": 5900000, "purchases": 3800000 },
+  { "month": "Jun", "sales": 7100000, "purchases": 4500000 }
+]

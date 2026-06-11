@@ -1,0 +1,410 @@
+{
+  "prod-1": {
+    "images": [
+      "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1597852079136-54a9f2a910cc?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1587202372775-e229f172b841?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1562976543-908da50b39f2?w=800&h=600&fit=crop"
+    ],
+    "longDescription": "La NVIDIA GeForce RTX 4070 Super ofrece un salto notable en rendimiento respecto a la generación anterior, ideal para gaming en 1440p con tasas altas y streaming simultáneo.\n\nIncluye tecnologías DLSS 3 y ray tracing de última generación. El diseño de triple ventilador mantiene temperaturas controladas incluso en sesiones prolongadas.\n\nProducto nuevo en caja sellada con garantía oficial del fabricante. Consultá por envíos a todo el país.",
+    "questions": [
+      {
+        "id": "q1-1",
+        "author": "Martín L.",
+        "question": "¿Viene con factura A?",
+        "answer": "Sí, emitimos factura A o B según corresponda. Escribinos por WhatsApp con tu CUIT.",
+        "answeredBy": "Vendedor Marlbtime",
+        "date": "2026-04-02",
+        "answerDate": "2026-04-02"
+      },
+      {
+        "id": "q1-2",
+        "author": "Sofía R.",
+        "question": "¿La fuente de 650W alcanza para esta placa?",
+        "answer": "Recomendamos mínimo 650W de buena calidad (80 Plus Gold). Si tenés muchos periféricos, mejor 750W.",
+        "answeredBy": "Vendedor Marlbtime",
+        "date": "2026-05-18",
+        "answerDate": "2026-05-19"
+      }
+    ],
+    "specifications": [
+      { "label": "GPU", "value": "NVIDIA GeForce RTX 4070 Super" },
+      { "label": "Memoria VRAM", "value": "12 GB GDDR6X" },
+      { "label": "Interfaz", "value": "PCIe 4.0 x16" },
+      { "label": "Conectores de video", "value": "3x DisplayPort, 1x HDMI 2.1" },
+      { "label": "Consumo", "value": "220W" },
+      { "label": "Garantía", "value": "36 meses oficial" }
+    ],
+    "reviews": [
+      { "id": "r1-1", "author": "Matías R.", "rating": 5, "comment": "Corre todo en ultra a 1440p sin problemas. Muy silenciosa.", "date": "2026-04-12" },
+      { "id": "r1-2", "author": "Lucas G.", "rating": 4, "comment": "Excelente rendimiento, el precio es alto pero vale la pena.", "date": "2026-05-02" }
+    ]
+  },
+  "prod-2": {
+    "images": [
+      "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1562976543-908da50b39f2?w=800&h=600&fit=crop"
+    ],
+    "specifications": [
+      { "label": "Núcleos / Hilos", "value": "8 / 16" },
+      { "label": "Socket", "value": "AM5" },
+      { "label": "Frecuencia boost", "value": "5.0 GHz" },
+      { "label": "Caché", "value": "96 MB 3D V-Cache" },
+      { "label": "TDP", "value": "120W" },
+      { "label": "Garantía", "value": "36 meses" }
+    ],
+    "reviews": [
+      { "id": "r2-1", "author": "Diego P.", "rating": 5, "comment": "El mejor CPU para gaming que probé. Temperaturas bajas.", "date": "2026-03-20" },
+      { "id": "r2-2", "author": "Ana M.", "rating": 5, "comment": "Subí muchísimo los FPS en juegos competitivos.", "date": "2026-04-18" }
+    ]
+  },
+  "prod-3": {
+    "images": [
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1618384887929-16ec33cb3b89?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1541140535014-86697165a9ca?w=800&h=600&fit=crop"
+    ],
+    "specifications": [
+      { "label": "Tipo de switch", "value": "Mecánico Red" },
+      { "label": "Layout", "value": "TKL 87 teclas" },
+      { "label": "Retroiluminación", "value": "RGB por tecla" },
+      { "label": "Keycaps", "value": "PBT double-shot" },
+      { "label": "Conexión", "value": "USB-C detachable" },
+      { "label": "Anti-ghosting", "value": "Full N-key rollover" }
+    ],
+    "reviews": [
+      { "id": "r3-1", "author": "Federico L.", "rating": 4, "comment": "Muy cómodo para escribir y jugar. Los switches son suaves.", "date": "2026-02-15" }
+    ]
+  },
+  "prod-4": {
+    "specifications": [
+      { "label": "Audio", "value": "Virtual 7.1 Surround" },
+      { "label": "Micrófono", "value": "Desmontable con cancelación de ruido" },
+      { "label": "Conexión", "value": "USB / Jack 3.5mm" },
+      { "label": "Almohadillas", "value": "Memory foam" },
+      { "label": "Peso", "value": "320g" }
+    ],
+    "reviews": [
+      { "id": "r4-1", "author": "Carolina S.", "rating": 4, "comment": "Se escuchan bien los pasos en FPS. Cómodos por horas.", "date": "2026-01-28" },
+      { "id": "r4-2", "author": "Tomás V.", "rating": 3, "comment": "Buena calidad por el precio, el micrófono podría ser mejor.", "date": "2026-03-10" }
+    ]
+  },
+  "prod-5": {
+    "specifications": [
+      { "label": "Procesador", "value": "Intel Core i7 13va gen" },
+      { "label": "GPU", "value": "NVIDIA RTX 4060 8GB" },
+      { "label": "RAM", "value": "16 GB DDR5" },
+      { "label": "Almacenamiento", "value": "SSD 512 GB NVMe" },
+      { "label": "Pantalla", "value": "15.6\" FHD 144Hz" },
+      { "label": "Peso", "value": "2.1 kg" }
+    ],
+    "reviews": [
+      { "id": "r5-1", "author": "Julián A.", "rating": 5, "comment": "Corre Valorant y Fortnite en alto sin drama. Muy contento.", "date": "2026-04-05" },
+      { "id": "r5-2", "author": "María F.", "rating": 4, "comment": "Ideal para la facu y gaming. Se calienta un poco en verano.", "date": "2026-05-11" }
+    ]
+  },
+  "prod-6": {
+    "specifications": [
+      { "label": "Modelo", "value": "PlayStation 5 Slim Digital" },
+      { "label": "Almacenamiento", "value": "1 TB SSD" },
+      { "label": "Resolución", "value": "Hasta 4K 120Hz" },
+      { "label": "Incluye", "value": "1 control DualSense" },
+      { "label": "Lector de discos", "value": "No (edición digital)" },
+      { "label": "Garantía", "value": "12 meses Sony" }
+    ],
+    "reviews": [
+      { "id": "r6-1", "author": "Nico B.", "rating": 5, "comment": "Llegó sellada y en 2 días. Los gráficos son increíbles.", "date": "2026-03-01" },
+      { "id": "r6-2", "author": "Paula H.", "rating": 5, "comment": "Más compacta que la PS5 original. Muy recomendable.", "date": "2026-04-22" }
+    ]
+  },
+  "prod-7": {
+    "specifications": [
+      { "label": "Sensor", "value": "Óptico 26.000 DPI" },
+      { "label": "Conexión", "value": "Inalámbrico 2.4GHz + Bluetooth" },
+      { "label": "Batería", "value": "Hasta 70 horas" },
+      { "label": "Peso", "value": "63g" },
+      { "label": "Botones", "value": "6 programables" }
+    ],
+    "reviews": [
+      { "id": "r7-1", "author": "Agustín C.", "rating": 5, "comment": "Ultraliviano y preciso. La batería dura una banda.", "date": "2026-02-20" }
+    ]
+  },
+  "prod-8": {
+    "specifications": [
+      { "label": "Tamaño", "value": "27 pulgadas" },
+      { "label": "Resolución", "value": "2560 x 1440 (QHD)" },
+      { "label": "Tasa de refresco", "value": "165 Hz" },
+      { "label": "Panel", "value": "IPS" },
+      { "label": "Tiempo de respuesta", "value": "1 ms MPRT" },
+      { "label": "Conectores", "value": "DisplayPort, 2x HDMI" }
+    ],
+    "reviews": [
+      { "id": "r8-1", "author": "Rodrigo T.", "rating": 5, "comment": "Colores hermosos y 165Hz se nota muchísimo en shooters.", "date": "2026-05-15" },
+      { "id": "r8-2", "author": "Valentina D.", "rating": 4, "comment": "Muy buen monitor calidad-precio. Base un poco grande.", "date": "2026-06-01" }
+    ]
+  },
+  "prod-9": {
+    "specifications": [
+      { "label": "Capacidad", "value": "32 GB (2x16 GB)" },
+      { "label": "Tipo", "value": "DDR5" },
+      { "label": "Velocidad", "value": "6000 MHz" },
+      { "label": "Latencia", "value": "CL30" },
+      { "label": "Voltaje", "value": "1.35V" },
+      { "label": "Compatibilidad", "value": "Intel XMP 3.0 / AMD EXPO" }
+    ],
+    "reviews": [
+      { "id": "r9-1", "author": "Emilio W.", "rating": 5, "comment": "Se activó el EXPO sin drama en AM5. Muy estable.", "date": "2026-04-08" }
+    ]
+  },
+  "prod-10": {
+    "specifications": [
+      { "label": "Material", "value": "Aluminio y plástico ABS" },
+      { "label": "Hub USB", "value": "2 puertos USB 3.0" },
+      { "label": "Iluminación", "value": "RGB configurable" },
+      { "label": "Base", "value": "Antideslizante" }
+    ],
+    "reviews": [
+      { "id": "r10-1", "author": "Sofía K.", "rating": 4, "comment": "Práctico y ocupa poco espacio. El RGB queda lindo.", "date": "2026-03-25" }
+    ]
+  },
+  "prod-11": {
+    "specifications": [
+      { "label": "Pantalla", "value": "6.8\" Dynamic AMOLED 2X" },
+      { "label": "Procesador", "value": "Snapdragon 8 Gen 3" },
+      { "label": "RAM", "value": "12 GB" },
+      { "label": "Almacenamiento", "value": "256 GB" },
+      { "label": "Cámara principal", "value": "200 MP" },
+      { "label": "Batería", "value": "5000 mAh" }
+    ],
+    "reviews": [
+      { "id": "r11-1", "author": "Gabriel N.", "rating": 5, "comment": "La cámara es espectacular y el S-Pen muy útil.", "date": "2026-05-20" },
+      { "id": "r11-2", "author": "Laura P.", "rating": 5, "comment": "El mejor Android que tuve. Pantalla increíble.", "date": "2026-06-03" }
+    ]
+  },
+  "prod-12": {
+    "specifications": [
+      { "label": "Pantalla", "value": "6.1\" Super Retina XDR OLED" },
+      { "label": "Chip", "value": "Apple A17 Pro" },
+      { "label": "Almacenamiento", "value": "128 GB" },
+      { "label": "Cámara", "value": "Triple 48 MP principal" },
+      { "label": "Material", "value": "Titanio" },
+      { "label": "Resistencia", "value": "IP68" }
+    ],
+    "reviews": [
+      { "id": "r12-1", "author": "Camila R.", "rating": 5, "comment": "Rendimiento brutal y fotos excelentes de noche.", "date": "2026-04-14" },
+      { "id": "r12-2", "author": "Martín S.", "rating": 4, "comment": "Muy premium, la batería dura un día completo.", "date": "2026-05-28" }
+    ]
+  },
+  "prod-13": {
+    "specifications": [
+      { "label": "Pantalla", "value": "6.4\" pOLED 144Hz" },
+      { "label": "Procesador", "value": "MediaTek Dimensity 7030" },
+      { "label": "RAM", "value": "12 GB" },
+      { "label": "Almacenamiento", "value": "256 GB" },
+      { "label": "Carga rápida", "value": "68W" },
+      { "label": "Cámara", "value": "50 MP con OIS" }
+    ],
+    "reviews": [
+      { "id": "r13-1", "author": "Bruno E.", "rating": 4, "comment": "Muy buena relación precio-calidad. Carga rapidísima.", "date": "2026-03-18" }
+    ]
+  },
+  "prod-14": {
+    "specifications": [
+      { "label": "Pantalla", "value": "6.67\" AMOLED 120Hz" },
+      { "label": "Procesador", "value": "Snapdragon 7s Gen 2" },
+      { "label": "RAM", "value": "8 GB" },
+      { "label": "Almacenamiento", "value": "256 GB" },
+      { "label": "Cámara", "value": "200 MP" },
+      { "label": "Carga", "value": "67W" }
+    ],
+    "reviews": [
+      { "id": "r14-1", "author": "Florencia M.", "rating": 4, "comment": "Por este precio no hay nada mejor. Pantalla muy linda.", "date": "2026-02-28" },
+      { "id": "r14-2", "author": "Hernán J.", "rating": 4, "comment": "MIUI/HyperOS mejoró mucho. Recomendado.", "date": "2026-04-02" }
+    ]
+  },
+  "prod-15": {
+    "specifications": [
+      { "label": "Pantalla", "value": "11\" Dynamic AMOLED 2X" },
+      { "label": "Procesador", "value": "Snapdragon 8 Gen 2" },
+      { "label": "RAM", "value": "8 GB" },
+      { "label": "Almacenamiento", "value": "128 GB" },
+      { "label": "Incluye", "value": "S-Pen" },
+      { "label": "Batería", "value": "8400 mAh" }
+    ],
+    "reviews": [
+      { "id": "r15-1", "author": "Daniela O.", "rating": 5, "comment": "Perfecta para tomar apuntes en la facu. Pantalla top.", "date": "2026-05-08" }
+    ]
+  },
+  "prod-16": {
+    "specifications": [
+      { "label": "Modelo", "value": "Xbox Series X" },
+      { "label": "Almacenamiento", "value": "1 TB SSD custom" },
+      { "label": "Resolución", "value": "Hasta 4K 120fps" },
+      { "label": "Ray tracing", "value": "Sí" },
+      { "label": "Retrocompatibilidad", "value": "Xbox, 360 y One" },
+      { "label": "Garantía", "value": "12 meses Microsoft" }
+    ],
+    "reviews": [
+      { "id": "r16-1", "author": "Sebastián Q.", "rating": 5, "comment": "Game Pass + esta consola es combo perfecto.", "date": "2026-04-30" },
+      { "id": "r16-2", "author": "Iván L.", "rating": 5, "comment": "Silenciosa y potentísima. Carga de juegos rapidísima.", "date": "2026-05-25" }
+    ]
+  },
+  "prod-17": {
+    "specifications": [
+      { "label": "Modelo", "value": "Nintendo Switch OLED" },
+      { "label": "Pantalla", "value": "7\" OLED 720p" },
+      { "label": "Almacenamiento", "value": "64 GB" },
+      { "label": "Modos", "value": "Portátil, sobremesa y TV" },
+      { "label": "Batería", "value": "4.5 a 9 horas" },
+      { "label": "Incluye", "value": "Base, Joy-Con, grip" }
+    ],
+    "reviews": [
+      { "id": "r17-1", "author": "Melina C.", "rating": 5, "comment": "La pantalla OLED se nota muchísimo vs la Switch normal.", "date": "2026-03-12" },
+      { "id": "r17-2", "author": "Pablo Z.", "rating": 4, "comment": "Ideal para jugar en el bondi. Zelda se ve hermoso.", "date": "2026-04-19" }
+    ]
+  },
+  "prod-18": {
+    "specifications": [
+      { "label": "Compatibilidad", "value": "PlayStation 5 / PC" },
+      { "label": "Conexión", "value": "Inalámbrico USB-C" },
+      { "label": "Funciones", "value": "Háptica, gatillos adaptativos" },
+      { "label": "Batería", "value": "Hasta 12 horas" },
+      { "label": "Color", "value": "Blanco" }
+    ],
+    "reviews": [
+      { "id": "r18-1", "author": "Renzo A.", "rating": 5, "comment": "Segundo control indispensable para jugar en pareja.", "date": "2026-02-10" }
+    ]
+  },
+  "prod-19": {
+    "specifications": [
+      { "label": "Tipo", "value": "Over-ear inalámbrico" },
+      { "label": "Cancelación de ruido", "value": "Activa (ANC)" },
+      { "label": "Autonomía", "value": "Hasta 30 horas" },
+      { "label": "Audio", "value": "Hi-Res, LDAC" },
+      { "label": "Conexión", "value": "Bluetooth 5.3, jack 3.5mm" },
+      { "label": "Peso", "value": "250g" }
+    ],
+    "reviews": [
+      { "id": "r19-1", "author": "Claudia V.", "rating": 5, "comment": "La cancelación de ruido es bestial en el subte.", "date": "2026-05-05" },
+      { "id": "r19-2", "author": "Oscar T.", "rating": 5, "comment": "Comodísimos y suenan espectacular para música.", "date": "2026-06-02" }
+    ]
+  },
+  "prod-20": {
+    "specifications": [
+      { "label": "Resolución", "value": "1080p Full HD" },
+      { "label": "FPS", "value": "30 fps" },
+      { "label": "Enfoque", "value": "Autofoco automático" },
+      { "label": "Micrófono", "value": "Estéreo integrado" },
+      { "label": "Conexión", "value": "USB 2.0" },
+      { "label": "Compatibilidad", "value": "Windows, macOS, ChromeOS" }
+    ],
+    "reviews": [
+      { "id": "r20-1", "author": "Luciana B.", "rating": 4, "comment": "Para Zoom y streaming básico va perfecto.", "date": "2026-01-15" }
+    ]
+  },
+  "prod-21": {
+    "specifications": [
+      { "label": "Tipo", "value": "Condensador cardioide" },
+      { "label": "Conexión", "value": "USB plug & play" },
+      { "label": "Frecuencia", "value": "20 Hz - 20 kHz" },
+      { "label": "Incluye", "value": "Soporte, filtro antipop" },
+      { "label": "Uso", "value": "Streaming, podcast, clases" }
+    ],
+    "reviews": [
+      { "id": "r21-1", "author": "Maximiliano F.", "rating": 4, "comment": "Se escucha claro en Twitch. Muy fácil de configurar.", "date": "2026-03-05" },
+      { "id": "r21-2", "author": "Noelia G.", "rating": 5, "comment": "Lo uso para podcast y la calidad es muy profesional.", "date": "2026-04-11" }
+    ]
+  },
+  "prod-22": {
+    "specifications": [
+      { "label": "Tamaño", "value": "900 x 400 mm" },
+      { "label": "Superficie", "value": "Tela microtexturizada" },
+      { "label": "Base", "value": "Goma antideslizante" },
+      { "label": "Iluminación", "value": "RGB perimetral" },
+      { "label": "Bordes", "value": "Cosidos reforzados" }
+    ],
+    "reviews": [
+      { "id": "r22-1", "author": "Franco D.", "rating": 4, "comment": "Cubre teclado y mouse sobrado. Desliza perfecto.", "date": "2026-02-22" }
+    ]
+  },
+  "prod-23": {
+    "specifications": [
+      { "label": "Compatibilidad", "value": "PC, PS5, Switch" },
+      { "label": "Conexión", "value": "Inalámbrico + USB-C" },
+      { "label": "Botones", "value": "Programables" },
+      { "label": "Vibración", "value": "Dual motor" },
+      { "label": "Gatillos", "value": "Analógicos con sensibilidad ajustable" }
+    ],
+    "reviews": [
+      { "id": "r23-1", "author": "Ezequiel M.", "rating": 4, "comment": "Buena alternativa al control original. Se siente sólido.", "date": "2026-03-30" }
+    ]
+  },
+  "prod-24": {
+    "specifications": [
+      { "label": "Capacidad", "value": "1 TB" },
+      { "label": "Formato", "value": "M.2 2280 NVMe" },
+      { "label": "Interfaz", "value": "PCIe Gen4 x4" },
+      { "label": "Lectura", "value": "Hasta 7000 MB/s" },
+      { "label": "Escritura", "value": "Hasta 5000 MB/s" },
+      { "label": "TBW", "value": "600 TB" }
+    ],
+    "reviews": [
+      { "id": "r24-1", "author": "Walter H.", "rating": 5, "comment": "Windows arranca en segundos. Instalación sencilla.", "date": "2026-04-25" }
+    ]
+  },
+  "prod-25": {
+    "specifications": [
+      { "label": "Potencia", "value": "15W" },
+      { "label": "Estándar", "value": "Qi / MagSafe compatible" },
+      { "label": "Entrada", "value": "USB-C" },
+      { "label": "Indicador", "value": "LED de estado" },
+      { "label": "Protección", "value": "Sobrecalentamiento y sobrecarga" }
+    ],
+    "reviews": [
+      { "id": "r25-1", "author": "Andrea C.", "rating": 4, "comment": "Carga bien el iPhone. Compacto para el escritorio.", "date": "2026-01-20" }
+    ]
+  },
+  "prod-26": {
+    "specifications": [
+      { "label": "Compatibilidad", "value": "iPhone 15 Pro" },
+      { "label": "Protección", "value": "Estándar militar MIL-STD" },
+      { "label": "Material", "value": "TPU + policarbonato" },
+      { "label": "Extra", "value": "Soporte integrado" },
+      { "label": "Carga inalámbrica", "value": "Compatible" }
+    ],
+    "reviews": [
+      { "id": "r26-1", "author": "Patricia L.", "rating": 4, "comment": "Aguantó dos caídas sin drama. El soporte es útil.", "date": "2026-02-08" }
+    ]
+  },
+  "prod-27": {
+    "specifications": [
+      { "label": "Pantalla", "value": "1.5\" Super AMOLED" },
+      { "label": "Tamaño caja", "value": "44 mm" },
+      { "label": "GPS", "value": "Integrado" },
+      { "label": "Resistencia", "value": "IP68 + 5 ATM" },
+      { "label": "Batería", "value": "Hasta 40 horas" },
+      { "label": "Sensores", "value": "FC, SpO2, sueño, estrés" }
+    ],
+    "reviews": [
+      { "id": "r27-1", "author": "Ricardo N.", "rating": 5, "comment": "Monitoreo de salud muy completo. Se sincroniza al toque.", "date": "2026-05-12" },
+      { "id": "r27-2", "author": "Silvia P.", "rating": 4, "comment": "Lindo diseño y la batería rinde lo prometido.", "date": "2026-06-04" }
+    ]
+  },
+  "prod-28": {
+    "specifications": [
+      { "label": "Procesador", "value": "Intel Core i5 13va gen" },
+      { "label": "RAM", "value": "16 GB DDR4" },
+      { "label": "Almacenamiento", "value": "SSD 512 GB" },
+      { "label": "Pantalla", "value": "14\" FHD antirreflejo" },
+      { "label": "Peso", "value": "1.4 kg" },
+      { "label": "Autonomía", "value": "Hasta 10 horas" }
+    ],
+    "reviews": [
+      { "id": "r28-1", "author": "Verónica A.", "rating": 4, "comment": "Liviana y perfecta para la oficina. Arranca al toque.", "date": "2026-04-07" },
+      { "id": "r28-2", "author": "Gustavo I.", "rating": 4, "comment": "Buena para trabajo diario. No es para gaming pesado.", "date": "2026-05-19" }
+    ]
+  }
+}

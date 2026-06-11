@@ -1,0 +1,52 @@
+[
+  {
+    "id": "msg-1",
+    "from": "Martín López",
+    "email": "martin.lopez@email.com",
+    "subject": "Consulta RTX 4070 Super",
+    "body": "¿Tienen stock de la placa RTX 4070 Super? ¿Hacen envío a Rosario?",
+    "date": "2026-06-10T14:30:00.000Z",
+    "status": "pendiente",
+    "channel": "whatsapp"
+  },
+  {
+    "id": "msg-2",
+    "from": "Sofía Ramírez",
+    "email": "sofia.r@email.com",
+    "subject": "Garantía notebook",
+    "body": "Quisiera saber si la notebook Lenovo incluye garantía oficial y factura A.",
+    "date": "2026-06-09T10:15:00.000Z",
+    "status": "leido",
+    "channel": "email"
+  },
+  {
+    "id": "msg-3",
+    "from": "Diego Pérez",
+    "email": "diego.p@email.com",
+    "subject": "Producto usado teclado",
+    "body": "¿Pueden enviarme más fotos del teclado mecánico usado? ¿Tiene teclas fallando?",
+    "date": "2026-06-08T16:45:00.000Z",
+    "status": "respondido",
+    "channel": "web"
+  },
+  {
+    "id": "msg-4",
+    "from": "Ana Martínez",
+    "email": "ana.m@email.com",
+    "subject": "Pedido pendiente",
+    "body": "Hice un pedido hace 3 días y no recibí confirmación. ID: ord-5",
+    "date": "2026-06-07T09:00:00.000Z",
+    "status": "pendiente",
+    "channel": "whatsapp"
+  },
+  {
+    "id": "msg-5",
+    "from": "Lucas Gómez",
+    "email": "lucas.g@email.com",
+    "subject": "Descuento por volumen",
+    "body": "Necesito comprar 5 monitores para una oficina. ¿Hay precio mayorista?",
+    "date": "2026-06-06T11:20:00.000Z",
+    "status": "leido",
+    "channel": "email"
+  }
+]

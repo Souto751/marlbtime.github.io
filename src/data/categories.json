@@ -1,0 +1,38 @@
+[
+  {
+    "id": "cat-1",
+    "name": "Componentes PC",
+    "slug": "componentes-pc",
+    "description": "Procesadores, placas de video, memorias y almacenamiento"
+  },
+  {
+    "id": "cat-2",
+    "name": "Periféricos",
+    "slug": "perifericos",
+    "description": "Teclados, mouse, auriculares, monitores, webcams y micrófonos"
+  },
+  {
+    "id": "cat-3",
+    "name": "Notebooks",
+    "slug": "notebooks",
+    "description": "Laptops para gaming, estudio y trabajo"
+  },
+  {
+    "id": "cat-4",
+    "name": "Consolas",
+    "slug": "consolas",
+    "description": "PlayStation, Xbox, Nintendo, accesorios y videojuegos"
+  },
+  {
+    "id": "cat-5",
+    "name": "Accesorios",
+    "slug": "accesorios",
+    "description": "Fundas, cables, soportes, cargadores y hubs"
+  },
+  {
+    "id": "cat-6",
+    "name": "Celulares",
+    "slug": "celulares",
+    "description": "Smartphones, tablets y smartwatches"
+  }
+]
