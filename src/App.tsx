@@ -30,10 +30,13 @@ function RootLayout() {
   );
 }
 
-const router = createBrowserRouter([
-  {
-    element: <RootLayout />,
-    children: [
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const router = createBrowserRouter(
+  [
+    {
+      element: <RootLayout />,
+      children: [
       {
         path: 'admin',
         element: (
@@ -84,7 +87,9 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+  ],
+  { basename: basename || undefined },
+);
 
 export default function App() {
   return <RouterProvider router={router} />;
