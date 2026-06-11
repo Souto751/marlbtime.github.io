@@ -24,7 +24,6 @@ import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
 import {
   Box,
   Button,
-  Divider,
   Drawer,
   IconButton,
   List,
@@ -106,6 +105,22 @@ const SERVICE_ITEMS: NavItem[] = [
   },
 ];
 
+function DrawerSectionDivider({ isDark }: { isDark: boolean }) {
+  return (
+    <Box sx={{ px: 2.5, py: 1, bgcolor: 'background.default', flexShrink: 0 }}>
+      <Box
+        role="separator"
+        sx={{
+          height: '1px',
+          background: isDark
+            ? 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0.08) 80%, transparent 100%)'
+            : 'linear-gradient(90deg, transparent 0%, rgba(21,101,192,0.12) 20%, rgba(21,101,192,0.12) 80%, transparent 100%)',
+        }}
+      />
+    </Box>
+  );
+}
+
 export default function NavigationDrawer() {
   const theme = useTheme();
   const { mode, toggleMode } = useThemeMode();
@@ -163,11 +178,11 @@ export default function NavigationDrawer() {
           maxWidth: '100vw',
           display: 'flex',
           flexDirection: 'column',
-          bgcolor: 'background.paper',
+          bgcolor: 'background.default',
         },
       }}
     >
-      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', bgcolor: 'background.default' }}>
         <Box
           sx={{
             bgcolor: 'primary.main',
@@ -244,11 +259,13 @@ export default function NavigationDrawer() {
           </Box>
         </Box>
 
+        <DrawerSectionDivider isDark={isDark} />
+
         <List disablePadding sx={{ flex: 1, bgcolor: 'background.default' }}>
           {CATEGORY_ITEMS.map((item) => renderLink(item))}
         </List>
 
-        <Divider />
+        <DrawerSectionDivider isDark={isDark} />
 
         <List disablePadding sx={{ bgcolor: 'background.default' }}>
           {SERVICE_ITEMS.map((item) =>
@@ -256,7 +273,7 @@ export default function NavigationDrawer() {
           )}
         </List>
 
-        <Divider />
+        <DrawerSectionDivider isDark={isDark} />
 
         <List disablePadding sx={{ bgcolor: 'background.default' }}>
           <ListItemButton
