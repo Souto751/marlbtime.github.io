@@ -1,3 +1,5 @@
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
 import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
@@ -36,6 +38,7 @@ import {
 import type { ElementType } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigationDrawer } from '../../contexts/NavigationDrawerContext';
+import { useThemeMode } from '../../contexts/ThemeModeContext';
 import { buildWhatsAppLink, storeConfig } from '../../services/mockData';
 
 interface NavItem {
@@ -105,7 +108,9 @@ const SERVICE_ITEMS: NavItem[] = [
 
 export default function NavigationDrawer() {
   const theme = useTheme();
+  const { mode, toggleMode } = useThemeMode();
   const { isOpen, closeDrawer } = useNavigationDrawer();
+  const isDark = mode === 'dark';
 
   const handleNav = () => closeDrawer();
 
@@ -127,7 +132,10 @@ export default function NavigationDrawer() {
         sx={{
           py: 1.25,
           px: 2.5,
-          '&:hover': { bgcolor: 'action.hover' },
+          '&:hover': {
+            bgcolor:
+              theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'action.hover',
+          },
         }}
       >
         <ListItemIcon sx={{ minWidth: 36, color: 'primary.main' }}>
@@ -236,16 +244,45 @@ export default function NavigationDrawer() {
           </Box>
         </Box>
 
-        <List disablePadding sx={{ flex: 1 }}>
+        <List disablePadding sx={{ flex: 1, bgcolor: 'background.default' }}>
           {CATEGORY_ITEMS.map((item) => renderLink(item))}
         </List>
 
         <Divider />
 
-        <List disablePadding>
+        <List disablePadding sx={{ bgcolor: 'background.default' }}>
           {SERVICE_ITEMS.map((item) =>
             renderLink(item, item.to.startsWith('http') || item.to.startsWith('mailto')),
           )}
+        </List>
+
+        <Divider />
+
+        <List disablePadding sx={{ bgcolor: 'background.default' }}>
+          <ListItemButton
+            onClick={toggleMode}
+            sx={{
+              py: 1.25,
+              px: 2.5,
+              '&:hover': {
+                bgcolor: isDark ? 'rgba(255,255,255,0.06)' : 'action.hover',
+              },
+            }}
+          >
+            <ListItemIcon sx={{ minWidth: 36, color: 'primary.main' }}>
+              {mode === 'light' ? (
+                <LightModeOutlinedIcon sx={{ fontSize: 22 }} />
+              ) : (
+                <DarkModeOutlinedIcon sx={{ fontSize: 22 }} />
+              )}
+            </ListItemIcon>
+            <ListItemText
+              primary={mode === 'light' ? 'Modo claro' : 'Modo oscuro'}
+              secondary="Tocá para cambiar el tema"
+              primaryTypographyProps={{ fontSize: '0.95rem', color: 'text.primary' }}
+              secondaryTypographyProps={{ fontSize: '0.75rem' }}
+            />
+          </ListItemButton>
         </List>
 
         <Box sx={{ mt: 'auto', p: 2, bgcolor: 'background.default' }}>
