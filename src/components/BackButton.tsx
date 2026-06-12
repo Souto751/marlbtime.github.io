@@ -1,6 +1,7 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Button, type ButtonProps } from '@mui/material';
 import { useAppNavigate } from '../hooks/useAppNavigate';
+import { useTenantPath } from '../hooks/useTenantPath';
 
 interface BackButtonProps extends Omit<ButtonProps, 'onClick'> {
   fallback?: string;
@@ -8,7 +9,7 @@ interface BackButtonProps extends Omit<ButtonProps, 'onClick'> {
 }
 
 export default function BackButton({
-  fallback = '/',
+  fallback,
   label = 'Volver',
   variant = 'text',
   size = 'small',
@@ -16,13 +17,15 @@ export default function BackButton({
   ...props
 }: BackButtonProps) {
   const { goBack } = useAppNavigate();
+  const { home } = useTenantPath();
+  const resolvedFallback = fallback ?? home;
 
   return (
     <Button
       variant={variant}
       size={size}
       startIcon={<ArrowBackIcon />}
-      onClick={() => goBack(fallback)}
+      onClick={() => goBack(resolvedFallback)}
       sx={{ alignSelf: 'flex-start', mb: 1, ...sx }}
       {...props}
     >

@@ -3,12 +3,7 @@ import {
   Box,
   Button,
   Container,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
   Paper,
-  Radio,
-  RadioGroup,
   Stack,
   TextField,
   Typography,
@@ -17,17 +12,18 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useTenantPath } from '../hooks/useTenantPath';
 
 export default function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
+  const { tp, home } = useTenantPath();
 
   const [form, setForm] = useState({
     name: '',
     email: '',
     password: '',
     phone: '',
-    role: 'buyer' as 'buyer' | 'seller',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -43,7 +39,7 @@ export default function Register() {
     const result = await register(form);
     setLoading(false);
     if (result.success) {
-      navigate('/');
+      navigate(home);
     } else {
       setError(result.error || 'Error al registrarse');
     }
@@ -56,14 +52,18 @@ export default function Register() {
           <Box textAlign="center">
             <PersonAddIcon sx={{ fontSize: 48, color: 'primary.main', mb: 1 }} />
             <Typography variant="h5" gutterBottom>
-              Crear cuenta
+              Crear cuenta de comprador
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Registrate como comprador o vendedor
+              Registrate para comprar. Las cuentas de vendedor las habilita el administrador de cada tienda.
             </Typography>
           </Box>
 
           {error && <Alert severity="error">{error}</Alert>}
+
+          <Alert severity="info" variant="outlined">
+            ¿Querés vender? Contactá al admin de la tienda o a la plataforma Marlbtime para que habiliten tu cuenta.
+          </Alert>
 
           <Box component="form" onSubmit={handleSubmit}>
             <Stack spacing={2}>
@@ -99,27 +99,15 @@ export default function Register() {
                 onChange={(e) => handleChange('password', e.target.value)}
               />
 
-              <FormControl>
-                <FormLabel>Tipo de cuenta</FormLabel>
-                <RadioGroup
-                  row
-                  value={form.role}
-                  onChange={(e) => handleChange('role', e.target.value)}
-                >
-                  <FormControlLabel value="buyer" control={<Radio />} label="Comprador" />
-                  <FormControlLabel value="seller" control={<Radio />} label="Vendedor" />
-                </RadioGroup>
-              </FormControl>
-
               <Button type="submit" variant="contained" size="large" fullWidth disabled={loading}>
-                {loading ? 'Registrando...' : 'Registrarse'}
+                {loading ? 'Registrando...' : 'Registrarse como comprador'}
               </Button>
             </Stack>
           </Box>
 
           <Typography textAlign="center" variant="body2">
             ¿Ya tenés cuenta?{' '}
-            <Typography component={Link} to="/login" color="primary" variant="body2">
+            <Typography component={Link} to={tp('/login')} color="primary" variant="body2">
               Iniciá sesión
             </Typography>
           </Typography>

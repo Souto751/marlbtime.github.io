@@ -17,11 +17,15 @@ import PublishIcon from '@mui/icons-material/Publish';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useTenant } from '../contexts/TenantContext';
+import { useTenantPath } from '../hooks/useTenantPath';
 import { categories, createProduct } from '../services/mockData';
 
 export default function PublishProduct() {
   const { user } = useAuth();
+  const { tenant } = useTenant();
   const navigate = useNavigate();
+  const { tp } = useTenantPath();
 
   const [form, setForm] = useState({
     title: '',
@@ -44,6 +48,7 @@ export default function PublishProduct() {
     if (!user) return;
 
     const product = createProduct({
+      tenantId: tenant?.id ?? 'tenant-shop',
       title: form.title,
       description: form.description,
       price: Number(form.price),
@@ -56,7 +61,7 @@ export default function PublishProduct() {
     });
 
     setSuccess(true);
-    setTimeout(() => navigate(`/producto/${product.id}`), 1500);
+    setTimeout(() => navigate(tp(`/producto/${product.id}`)), 1500);
   };
 
   return (

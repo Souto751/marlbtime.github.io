@@ -13,14 +13,22 @@
     "password": "123456",
     "name": "Carlos Vendedor",
     "phone": "5491198765432",
-    "role": "seller"
+    "role": "buyer"
   },
   {
     "id": "user-3",
     "email": "admin@marlbtime.com",
     "password": "123456",
-    "name": "Admin Marlbtime",
+    "name": "Admin Plataforma",
     "phone": "5491100000000",
-    "role": "admin"
+    "role": "platform_admin"
+  },
+  {
+    "id": "user-4",
+    "email": "vendedor@shop2.com",
+    "password": "123456",
+    "name": "Laura Gaming",
+    "phone": "5491188776655",
+    "role": "buyer"
   }
 ]

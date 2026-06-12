@@ -6,27 +6,31 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid2';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { Link } from 'react-router-dom';
+import { useTenant } from '../contexts/TenantContext';
 import CategoryButtons from '../components/CategoryButtons';
 import ProductCard from '../components/ProductCard';
-import {
-  getFeaturedProducts,
-  storeConfig,
-} from '../services/mockData';
+import { getFeaturedProducts } from '../services/mockData';
+
+import { useTenantPath } from '../hooks/useTenantPath';
 
 export default function Home() {
+  const theme = useTheme();
+  const { storeConfig } = useTenant();
+  const { tp } = useTenantPath();
   const featured = getFeaturedProducts().slice(0, 8);
 
   return (
     <>
       <Box
         sx={{
-          background: 'linear-gradient(135deg, #1565c0 0%, #0d47a1 60%, #ff6f00 100%)',
+          background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 60%, ${theme.palette.secondary.main} 100%)`,
           color: 'white',
           py: { xs: 6, md: 10 },
           mb: 4,
@@ -47,7 +51,7 @@ export default function Home() {
                   size="large"
                   color="secondary"
                   component={Link}
-                  to="/productos"
+                  to={tp('/productos')}
                   endIcon={<ArrowForwardIcon />}
                 >
                   Ver productos
@@ -57,7 +61,7 @@ export default function Home() {
                   size="large"
                   sx={{ borderColor: 'white', color: 'white' }}
                   component={Link}
-                  to="/registro"
+                  to={tp('/registro')}
                 >
                   Crear cuenta
                 </Button>
@@ -91,7 +95,7 @@ export default function Home() {
 
         <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
           <Typography variant="h5">Destacados</Typography>
-          <Button component={Link} to="/productos" endIcon={<ArrowForwardIcon />}>
+          <Button component={Link} to={tp('/productos')} endIcon={<ArrowForwardIcon />}>
             Ver todos
           </Button>
         </Stack>

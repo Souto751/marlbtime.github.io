@@ -1,0 +1,14 @@
+[
+  {
+    "userId": "user-3",
+    "tenantId": "tenant-shop",
+    "role": "tenant_admin",
+    "enabled": true
+  },
+  {
+    "userId": "user-2",
+    "tenantId": "tenant-shop",
+    "role": "seller",
+    "enabled": true
+  }
+]

@@ -27,14 +27,17 @@ import SubNavbar from './SubNavbar';
 import { useAuth } from '../../contexts/AuthContext';
 import { useCart } from '../../contexts/CartContext';
 import { useNavigationDrawer } from '../../contexts/NavigationDrawerContext';
+import { useTenant } from '../../contexts/TenantContext';
+import { useTenantPath } from '../../hooks/useTenantPath';
 import { useThemeMode } from '../../contexts/ThemeModeContext';
-import { storeConfig } from '../../services/mockData';
 
 export default function Header() {
   const { user, logout, isAuthenticated } = useAuth();
   const { totalItems } = useCart();
   const { openDrawer } = useNavigationDrawer();
   const { mode } = useThemeMode();
+  const { storeConfig, canAccessTenantAdmin, isEnabledSeller } = useTenant();
+  const { tp, home } = useTenantPath();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -42,7 +45,7 @@ export default function Header() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (search.trim()) {
-      navigate(`/productos?q=${encodeURIComponent(search.trim())}`);
+      navigate(`${tp('/productos')}?q=${encodeURIComponent(search.trim())}`);
       setSearch('');
     }
   };
@@ -97,7 +100,7 @@ export default function Header() {
 
               <Stack
                 component={Link}
-                to="/"
+                to={home}
                 direction="row"
                 alignItems="center"
                 spacing={1.25}
@@ -159,11 +162,22 @@ export default function Header() {
               alignItems="center"
               sx={{ flexShrink: 0, ml: 'auto' }}
             >
-              {isAuthenticated && user?.role === 'admin' && (
+              {isAuthenticated && user?.role === 'platform_admin' && (
                 <Button
                   color="inherit"
                   component={Link}
-                  to="/admin"
+                  to="/platform"
+                  sx={{ display: { xs: 'none', md: 'inline-flex' }, fontWeight: 600, px: 2 }}
+                >
+                  Plataforma
+                </Button>
+              )}
+
+              {isAuthenticated && canAccessTenantAdmin && (
+                <Button
+                  color="inherit"
+                  component={Link}
+                  to={tp('/admin')}
                   startIcon={<DashboardCustomizeOutlinedIcon />}
                   sx={{
                     display: { xs: 'none', md: 'inline-flex' },
@@ -175,11 +189,11 @@ export default function Header() {
                 </Button>
               )}
 
-              {isAuthenticated && user?.role === 'seller' && (
+              {isAuthenticated && isEnabledSeller && (
                 <Button
                   color="inherit"
                   component={Link}
-                  to="/publicar"
+                  to={tp('/publicar')}
                   sx={{
                     display: { xs: 'none', md: 'inline-flex' },
                     fontWeight: 600,
@@ -194,7 +208,7 @@ export default function Header() {
                 <IconButton
                   color="inherit"
                   component={Link}
-                  to="/carrito"
+                  to={tp('/carrito')}
                   aria-label="Carrito"
                   sx={{ mx: { xs: 0, md: 0.5 } }}
                 >
@@ -219,19 +233,19 @@ export default function Header() {
                     <MenuItem disabled>
                       <Typography variant="body2">{user?.name}</Typography>
                     </MenuItem>
-                    {user?.role === 'admin' && (
+                    {canAccessTenantAdmin && (
                       <MenuItem
                         component={Link}
-                        to="/admin"
+                        to={tp('/admin')}
                         onClick={() => setAnchorEl(null)}
                       >
                         Panel de administración
                       </MenuItem>
                     )}
-                    {user?.role === 'seller' && (
+                    {isEnabledSeller && (
                       <MenuItem
                         component={Link}
-                        to="/mis-publicaciones"
+                        to={tp('/mis-publicaciones')}
                         onClick={() => setAnchorEl(null)}
                       >
                         Mis publicaciones
@@ -241,7 +255,7 @@ export default function Header() {
                       onClick={() => {
                         logout();
                         setAnchorEl(null);
-                        navigate('/');
+                        navigate(home);
                       }}
                     >
                       Cerrar sesión
@@ -252,7 +266,7 @@ export default function Header() {
                 <Button
                   color="inherit"
                   component={Link}
-                  to="/login"
+                  to={tp('/login')}
                   variant="outlined"
                   size="small"
                   sx={{

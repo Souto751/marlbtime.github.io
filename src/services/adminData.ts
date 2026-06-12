@@ -17,34 +17,35 @@ import type {
   Supplier,
   SupplierStatus,
 } from '../types';
+import { getActiveTenantId, getTenantStorageKey } from './tenantScope';
 
-const MESSAGES_KEY = 'marlbtime_admin_messages';
-const ORDERS_KEY = 'marlbtime_admin_orders';
-const SUPPLIERS_KEY = 'marlbtime_admin_suppliers';
-const OVERRIDES_KEY = 'marlbtime_admin_product_overrides';
-const CREATED_PRODUCTS_KEY = 'marlbtime_admin_created_products';
-const CATALOG_EDITS_KEY = 'marlbtime_admin_catalog_edits';
-const DETAILS_EDITS_KEY = 'marlbtime_admin_details_edits';
+const MESSAGES_SUFFIX = 'admin_messages';
+const ORDERS_SUFFIX = 'admin_orders';
+const SUPPLIERS_SUFFIX = 'admin_suppliers';
+const OVERRIDES_SUFFIX = 'admin_product_overrides';
+const CREATED_PRODUCTS_SUFFIX = 'admin_created_products';
+const CATALOG_EDITS_SUFFIX = 'admin_catalog_edits';
+const DETAILS_EDITS_SUFFIX = 'admin_details_edits';
 
-function loadJson<T>(key: string, fallback: T): T {
+function loadJson<T>(suffix: string, fallback: T): T {
   try {
-    const stored = localStorage.getItem(key);
+    const stored = localStorage.getItem(getTenantStorageKey(suffix));
     return stored ? JSON.parse(stored) : fallback;
   } catch {
     return fallback;
   }
 }
 
-function saveJson<T>(key: string, data: T): void {
-  localStorage.setItem(key, JSON.stringify(data));
+function saveJson<T>(suffix: string, data: T): void {
+  localStorage.setItem(getTenantStorageKey(suffix), JSON.stringify(data));
 }
 
 export function getProductOverrides(): Record<string, AdminProductOverride> {
-  return loadJson(OVERRIDES_KEY, {});
+  return loadJson(OVERRIDES_SUFFIX, {});
 }
 
 export function getAdminCreatedProducts(): Product[] {
-  return loadJson(CREATED_PRODUCTS_KEY, []);
+  return loadJson(CREATED_PRODUCTS_SUFFIX, []);
 }
 
 export function saveAdminCreatedProduct(product: Product): void {
@@ -52,12 +53,12 @@ export function saveAdminCreatedProduct(product: Product): void {
   const index = products.findIndex((p) => p.id === product.id);
   if (index >= 0) products[index] = product;
   else products.push(product);
-  saveJson(CREATED_PRODUCTS_KEY, products);
+  saveJson(CREATED_PRODUCTS_SUFFIX, products);
 }
 
 export function deleteAdminCreatedProduct(id: string): void {
   saveJson(
-    CREATED_PRODUCTS_KEY,
+    CREATED_PRODUCTS_SUFFIX,
     getAdminCreatedProducts().filter((p) => p.id !== id),
   );
 }
@@ -68,17 +69,17 @@ export function isAdminCreatedProduct(id: string): boolean {
 
 export function getAdminCatalogEdits(): Record<string, AdminCatalogEdit> {
   const legacy = getProductOverrides() as Record<string, AdminCatalogEdit>;
-  const edits = loadJson<Record<string, AdminCatalogEdit>>(CATALOG_EDITS_KEY, {});
+  const edits = loadJson<Record<string, AdminCatalogEdit>>(CATALOG_EDITS_SUFFIX, {});
   return { ...legacy, ...edits };
 }
 
 export function saveAdminCatalogEdit(productId: string, data: AdminCatalogEdit): void {
-  const edits = loadJson<Record<string, AdminCatalogEdit>>(CATALOG_EDITS_KEY, {});
+  const edits = loadJson<Record<string, AdminCatalogEdit>>(CATALOG_EDITS_SUFFIX, {});
   edits[productId] = { ...edits[productId], ...data };
   if (data.originalPrice === null) {
     edits[productId].originalPrice = null;
   }
-  saveJson(CATALOG_EDITS_KEY, edits);
+  saveJson(CATALOG_EDITS_SUFFIX, edits);
 
   const legacy: AdminProductOverride = {};
   if (data.stock !== undefined) legacy.stock = data.stock;
@@ -91,13 +92,13 @@ export function saveAdminCatalogEdit(productId: string, data: AdminCatalogEdit):
 }
 
 export function getAdminDetailsEdits(): Record<string, AdminDetailsEdit> {
-  return loadJson(DETAILS_EDITS_KEY, {});
+  return loadJson(DETAILS_EDITS_SUFFIX, {});
 }
 
 export function saveAdminDetailsEdit(productId: string, data: AdminDetailsEdit): void {
-  const edits = loadJson<Record<string, AdminDetailsEdit>>(DETAILS_EDITS_KEY, {});
+  const edits = loadJson<Record<string, AdminDetailsEdit>>(DETAILS_EDITS_SUFFIX, {});
   edits[productId] = { ...edits[productId], ...data };
-  saveJson(DETAILS_EDITS_KEY, edits);
+  saveJson(DETAILS_EDITS_SUFFIX, edits);
 }
 
 function applyCatalogEdit(product: Product, edit: AdminCatalogEdit): Product {
@@ -211,6 +212,7 @@ export function saveAdminProductForm(
   const specifications = form.specifications.filter((s) => s.label.trim() && s.value.trim());
 
   const productBase = {
+    tenantId: getActiveTenantId(),
     title: form.title.trim(),
     description: form.description.trim(),
     price: form.price,
@@ -293,11 +295,11 @@ export function updateProductOverride(
   }
 
   overrides[productId] = merged;
-  saveJson(OVERRIDES_KEY, overrides);
+  saveJson(OVERRIDES_SUFFIX, overrides);
 }
 
 export function getAdminMessages(): AdminMessage[] {
-  return loadJson(MESSAGES_KEY, adminMessagesData as AdminMessage[]);
+  return loadJson(MESSAGES_SUFFIX, adminMessagesData as AdminMessage[]);
 }
 
 export function updateMessageStatus(id: string, status: MessageStatus): void {
@@ -305,11 +307,11 @@ export function updateMessageStatus(id: string, status: MessageStatus): void {
   const index = messages.findIndex((m) => m.id === id);
   if (index === -1) return;
   messages[index] = { ...messages[index], status };
-  saveJson(MESSAGES_KEY, messages);
+  saveJson(MESSAGES_SUFFIX, messages);
 }
 
 export function getAdminOrders(): AdminOrder[] {
-  return loadJson(ORDERS_KEY, adminOrdersData as AdminOrder[]);
+  return loadJson(ORDERS_SUFFIX, adminOrdersData as AdminOrder[]);
 }
 
 export function updateOrderStatus(id: string, status: OrderStatus): void {
@@ -317,11 +319,16 @@ export function updateOrderStatus(id: string, status: OrderStatus): void {
   const index = orders.findIndex((o) => o.id === id);
   if (index === -1) return;
   orders[index] = { ...orders[index], status };
-  saveJson(ORDERS_KEY, orders);
+  saveJson(ORDERS_SUFFIX, orders);
 }
 
-export function getAdminSuppliers(): Supplier[] {
-  return loadJson(SUPPLIERS_KEY, adminSuppliersData as Supplier[]);
+export function getAdminSuppliers(sellerId?: string): Supplier[] {
+  const suppliers = loadJson(SUPPLIERS_SUFFIX, adminSuppliersData as Supplier[]).map((s) => ({
+    ...s,
+    tenantId: s.tenantId ?? getActiveTenantId(),
+  }));
+  if (!sellerId) return suppliers;
+  return suppliers.filter((s) => !s.sellerId || s.sellerId === sellerId);
 }
 
 export function saveSupplier(supplier: Supplier): void {
@@ -332,12 +339,12 @@ export function saveSupplier(supplier: Supplier): void {
   } else {
     suppliers.push(supplier);
   }
-  saveJson(SUPPLIERS_KEY, suppliers);
+  saveJson(SUPPLIERS_SUFFIX, suppliers);
 }
 
 export function deleteSupplier(id: string): void {
   const suppliers = getAdminSuppliers().filter((s) => s.id !== id);
-  saveJson(SUPPLIERS_KEY, suppliers);
+  saveJson(SUPPLIERS_SUFFIX, suppliers);
 }
 
 export function getSalesStats(): SalesStat[] {

@@ -15,6 +15,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useNavigationDrawer } from '../../contexts/NavigationDrawerContext';
 import { useThemeMode } from '../../contexts/ThemeModeContext';
+import { useTenantPath } from '../../hooks/useTenantPath';
 
 const QUICK_NAV_LINKS = [
   { label: 'Armá tu PC', to: '/categoria/componentes-pc' },
@@ -28,6 +29,7 @@ export default function SubNavbar() {
   const theme = useTheme();
   const { mode, toggleMode } = useThemeMode();
   const { openDrawer } = useNavigationDrawer();
+  const { tp } = useTenantPath();
   const isDark = mode === 'dark';
 
   const linkSx = {
@@ -65,9 +67,10 @@ export default function SubNavbar() {
   return (
     <Box
       sx={{
-        bgcolor: isDark ? '#2e3440' : '#f0f0f0',
-        borderBottom: isDark ? '1px solid #4a5568' : '1px solid #e0e0e0',
-        boxShadow: isDark ? 'inset 0 1px 0 rgba(255,255,255,0.06)' : 'none',
+        bgcolor: isDark ? 'background.paper' : '#f0f0f0',
+        borderBottom: '1px solid',
+        borderColor: isDark ? 'divider' : '#e0e0e0',
+        boxShadow: isDark ? 'inset 0 1px 0 rgba(255,255,255,0.04)' : 'none',
         display: { xs: 'none', md: 'block' },
       }}
     >
@@ -98,7 +101,7 @@ export default function SubNavbar() {
             alignItems="center"
             spacing={0.75}
             component={Link}
-            to="/productos?ofertas=1"
+            to={tp('/productos?ofertas=1')}
             sx={{ ...offerLinkSx, ml: 0.5, display: 'flex', flexDirection: 'row', alignItems: 'center' }}
           >
             <LocalOfferOutlinedIcon sx={{ fontSize: 18 }} />
@@ -112,7 +115,7 @@ export default function SubNavbar() {
             alignItems="center"
             spacing={0.75}
             component={Link}
-            to="/productos?usados=1"
+            to={tp('/productos?usados=1')}
             sx={{ ...usedLinkSx, display: 'flex', flexDirection: 'row', alignItems: 'center' }}
           >
             <RecyclingOutlinedIcon sx={{ fontSize: 18 }} />
@@ -124,12 +127,12 @@ export default function SubNavbar() {
           <Divider
             orientation="vertical"
             flexItem
-            sx={{ mx: 1, my: 1.25, borderColor: isDark ? '#5c6778' : '#c4c4c4' }}
+            sx={{ mx: 1, my: 1.25, borderColor: 'divider' }}
           />
 
           <Stack direction="row" alignItems="center" sx={{ flex: 1 }}>
             {QUICK_NAV_LINKS.map((link) => (
-              <Typography key={link.label} component={Link} to={link.to} sx={linkSx}>
+              <Typography key={link.label} component={Link} to={tp(link.to)} sx={linkSx}>
                 {link.label}
               </Typography>
             ))}
@@ -151,8 +154,8 @@ export default function SubNavbar() {
               aria-label="Cambiar tema"
               sx={{
                 border: '1px solid',
-                borderColor: isDark ? '#5c6778' : '#bdbdbd',
-                bgcolor: isDark ? '#3b4252' : 'background.paper',
+                borderColor: 'divider',
+                bgcolor: isDark ? 'background.default' : 'background.paper',
                 color: isDark ? 'primary.light' : 'text.primary',
                 width: 32,
                 height: 32,

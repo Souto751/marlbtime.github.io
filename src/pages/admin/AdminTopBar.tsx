@@ -12,15 +12,16 @@ import { useAuth } from '../../contexts/AuthContext';
 interface AdminTopBarProps {
   drawerWidth: number;
   onMenuClick: () => void;
+  logoutTo?: string;
 }
 
-export default function AdminTopBar({ drawerWidth, onMenuClick }: AdminTopBarProps) {
+export default function AdminTopBar({ drawerWidth, onMenuClick, logoutTo = '/' }: AdminTopBarProps) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate(logoutTo);
   };
 
   return (

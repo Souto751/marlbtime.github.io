@@ -10,6 +10,7 @@ import {
   saveAdminProductForm,
 } from '../../services/adminData';
 import { getProductById, getProductDetails } from '../../services/mockData';
+import { useTenantPath } from '../../hooks/useTenantPath';
 import type { AdminProductFormData } from '../../types';
 import AdminProductForm from './AdminProductForm';
 import { AdminPageHeader } from './adminUi';
@@ -18,6 +19,7 @@ export default function AdminProductEdit() {
   const { id } = useParams<{ id: string }>();
   const isNew = id === 'nuevo';
   const navigate = useNavigate();
+  const { tp } = useTenantPath();
   const { user } = useAuth();
   const [snackbar, setSnackbar] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -44,7 +46,7 @@ export default function AdminProductEdit() {
     setSaved(true);
 
     if (isNew) {
-      setTimeout(() => navigate(`/admin/productos/${savedProduct.id}`), 800);
+      setTimeout(() => navigate(tp(`/admin/productos/${savedProduct.id}`)), 800);
       return;
     }
 
@@ -62,7 +64,7 @@ export default function AdminProductEdit() {
         <Typography variant="h6" color="error" gutterBottom>
           Producto no encontrado
         </Typography>
-        <Button component={Link} to="/admin/productos">
+        <Button component={Link} to={tp('/admin/productos')}>
           Volver al listado
         </Button>
       </Box>
@@ -74,7 +76,7 @@ export default function AdminProductEdit() {
       <UnsavedChangesPrompt when={hasChanges} />
       <Button
         component={Link}
-        to="/admin/productos"
+        to={tp('/admin/productos')}
         startIcon={<ArrowBackIcon />}
         size="small"
         sx={{ mb: 2 }}

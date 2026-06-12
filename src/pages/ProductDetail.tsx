@@ -24,6 +24,7 @@ import ProductQuestions from '../components/ProductQuestions';
 import ProductReviews from '../components/ProductReviews';
 import ProductSpecifications from '../components/ProductSpecifications';
 import RelatedProducts from '../components/RelatedProducts';
+import { useTenantPath } from '../hooks/useTenantPath';
 import {
   buildWhatsAppLink,
   formatPrice,
@@ -38,6 +39,7 @@ import {
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
+  const { tp, home } = useTenantPath();
   const product = id ? getProductById(id) : undefined;
   const { addToCart } = useCart();
   const [snackbar, setSnackbar] = useState(false);
@@ -70,18 +72,18 @@ export default function ProductDetail() {
 
   return (
     <Container maxWidth="lg">
-      <BackButton fallback={category ? `/categoria/${category.slug}` : '/productos'} />
+      <BackButton fallback={category ? tp(`/categoria/${category.slug}`) : tp('/productos')} />
       <Breadcrumbs sx={{ mb: 2 }}>
-        <Typography component={Link} to="/" color="inherit" sx={{ textDecoration: 'none' }}>
+        <Typography component={Link} to={home} color="inherit" sx={{ textDecoration: 'none' }}>
           Inicio
         </Typography>
-        <Typography component={Link} to="/productos" color="inherit" sx={{ textDecoration: 'none' }}>
+        <Typography component={Link} to={tp('/productos')} color="inherit" sx={{ textDecoration: 'none' }}>
           Productos
         </Typography>
         {category && (
           <Typography
             component={Link}
-            to={`/categoria/${category.slug}`}
+            to={tp(`/categoria/${category.slug}`)}
             color="inherit"
             sx={{ textDecoration: 'none' }}
           >

@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTenantPath } from './useTenantPath';
 
 function canGoBackInHistory(): boolean {
   const idx = window.history.state?.idx;
@@ -8,16 +9,17 @@ function canGoBackInHistory(): boolean {
 
 export function useAppNavigate() {
   const navigate = useNavigate();
+  const { home } = useTenantPath();
 
   const goBack = useCallback(
-    (fallback = '/') => {
+    (fallback = home) => {
       if (canGoBackInHistory()) {
         navigate(-1);
       } else {
         navigate(fallback);
       }
     },
-    [navigate],
+    [navigate, home],
   );
 
   return { navigate, goBack, canGoBack: canGoBackInHistory };

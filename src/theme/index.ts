@@ -1,20 +1,26 @@
 import { createTheme } from '@mui/material/styles';
+import { expandPaletteColors } from './palettes';
+import type { ThemePaletteColors } from '../types';
 
-export function createAppTheme(mode: 'light' | 'dark') {
+export function createAppTheme(mode: 'light' | 'dark', paletteColors: ThemePaletteColors) {
+  const colors = expandPaletteColors(paletteColors);
+
   return createTheme({
     palette: {
       mode,
       primary: {
-        main: '#1565c0',
-        dark: '#0d47a1',
-        light: '#42a5f5',
+        main: colors.primaryMain,
+        dark: colors.primaryDark,
+        light: colors.primaryLight,
       },
       secondary: {
-        main: '#ff6f00',
+        main: colors.secondaryMain,
+        dark: colors.secondaryDark,
+        light: colors.secondaryLight,
       },
       background: {
-        default: mode === 'light' ? '#f5f7fa' : '#121212',
-        paper: mode === 'light' ? '#ffffff' : '#252525',
+        default: colors.backgroundDefault,
+        paper: colors.backgroundPaper,
       },
       divider: mode === 'light' ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.12)',
     },
@@ -48,4 +54,4 @@ export function createAppTheme(mode: 'light' | 'dark') {
   });
 }
 
-export default createAppTheme('light');
+export { BUILTIN_PALETTES, DEFAULT_PALETTE_ID, getBuiltinPalette } from './palettes';

@@ -5,9 +5,12 @@ import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import { Link } from 'react-router-dom';
-import { storeConfig } from '../../services/mockData';
+import { useTenant } from '../../contexts/TenantContext';
+import { useTenantPath } from '../../hooks/useTenantPath';
 
 export default function Footer() {
+  const { storeConfig } = useTenant();
+  const { tp } = useTenantPath();
   return (
     <Box component="footer" sx={{ bgcolor: 'grey.900', color: 'grey.300', mt: 'auto', py: 4 }}>
       <Container maxWidth="xl">
@@ -26,13 +29,13 @@ export default function Footer() {
               Enlaces
             </Typography>
             <Stack spacing={0.5}>
-              <Typography component={Link} to="/productos" variant="body2" color="inherit" sx={{ textDecoration: 'none' }}>
+              <Typography component={Link} to={tp('/productos')} variant="body2" color="inherit" sx={{ textDecoration: 'none' }}>
                 Productos
               </Typography>
-              <Typography component={Link} to="/login" variant="body2" color="inherit" sx={{ textDecoration: 'none' }}>
+              <Typography component={Link} to={tp('/login')} variant="body2" color="inherit" sx={{ textDecoration: 'none' }}>
                 Iniciar sesión
               </Typography>
-              <Typography component={Link} to="/registro" variant="body2" color="inherit" sx={{ textDecoration: 'none' }}>
+              <Typography component={Link} to={tp('/registro')} variant="body2" color="inherit" sx={{ textDecoration: 'none' }}>
                 Registrarse
               </Typography>
             </Stack>

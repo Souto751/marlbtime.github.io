@@ -38,7 +38,9 @@ import type { ElementType } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigationDrawer } from '../../contexts/NavigationDrawerContext';
 import { useThemeMode } from '../../contexts/ThemeModeContext';
-import { buildWhatsAppLink, storeConfig } from '../../services/mockData';
+import { useTenant } from '../../contexts/TenantContext';
+import { useTenantPath } from '../../hooks/useTenantPath';
+import { buildWhatsAppLink } from '../../services/mockData';
 
 interface NavItem {
   label: string;
@@ -86,24 +88,26 @@ const CATEGORY_ITEMS: NavItem[] = [
   { label: 'Outlet', to: '/productos?ofertas=1', icon: SellOutlinedIcon },
 ];
 
-const SERVICE_ITEMS: NavItem[] = [
-  { label: 'Seguir mi Pedido', to: '/carrito', icon: LocationOnOutlinedIcon },
-  {
-    label: 'Subir Comprobante',
-    to: buildWhatsAppLink('Hola! Quiero subir un comprobante de pago.'),
-    icon: UploadFileOutlinedIcon,
-  },
-  {
-    label: 'RMA — Garantía',
-    to: buildWhatsAppLink('Hola! Necesito consultar por garantía / RMA.'),
-    icon: VerifiedUserOutlinedIcon,
-  },
-  {
-    label: 'Ayuda',
-    to: `mailto:${storeConfig.email}?subject=Ayuda Marlbtime Store`,
-    icon: HelpOutlineIcon,
-  },
-];
+function getServiceItems(email: string, whatsapp: string): NavItem[] {
+  return [
+    { label: 'Seguir mi Pedido', to: '/carrito', icon: LocationOnOutlinedIcon },
+    {
+      label: 'Subir Comprobante',
+      to: buildWhatsAppLink('Hola! Quiero subir un comprobante de pago.', whatsapp),
+      icon: UploadFileOutlinedIcon,
+    },
+    {
+      label: 'RMA — Garantía',
+      to: buildWhatsAppLink('Hola! Necesito consultar por garantía / RMA.', whatsapp),
+      icon: VerifiedUserOutlinedIcon,
+    },
+    {
+      label: 'Ayuda',
+      to: `mailto:${email}?subject=Ayuda tienda`,
+      icon: HelpOutlineIcon,
+    },
+  ];
+}
 
 function DrawerSectionDivider({ isDark }: { isDark: boolean }) {
   return (
@@ -124,8 +128,12 @@ function DrawerSectionDivider({ isDark }: { isDark: boolean }) {
 export default function NavigationDrawer() {
   const theme = useTheme();
   const { mode, toggleMode } = useThemeMode();
+  const { storeConfig } = useTenant();
+  const { tp, home } = useTenantPath();
   const { isOpen, closeDrawer } = useNavigationDrawer();
   const isDark = mode === 'dark';
+
+  const serviceItems = getServiceItems(storeConfig.email, storeConfig.whatsapp);
 
   const handleNav = () => closeDrawer();
 
@@ -142,7 +150,7 @@ export default function NavigationDrawer() {
               target: item.to.startsWith('http') ? '_blank' : undefined,
               rel: 'noopener noreferrer',
             }
-          : { to: item.to })}
+          : { to: tp(item.to) })}
         onClick={handleNav}
         sx={{
           py: 1.25,
@@ -197,7 +205,7 @@ export default function NavigationDrawer() {
               alignItems="center"
               spacing={1.25}
               component={Link}
-              to="/"
+              to={home}
               onClick={handleNav}
               sx={{ textDecoration: 'none', color: 'inherit' }}
             >
@@ -229,7 +237,7 @@ export default function NavigationDrawer() {
               <Button
                 key={action.label}
                 component={Link}
-                to={action.to}
+                to={tp(action.to)}
                 onClick={handleNav}
                 variant="outlined"
                 startIcon={<action.icon sx={{ fontSize: 18 }} />}
@@ -268,7 +276,7 @@ export default function NavigationDrawer() {
         <DrawerSectionDivider isDark={isDark} />
 
         <List disablePadding sx={{ bgcolor: 'background.default' }}>
-          {SERVICE_ITEMS.map((item) =>
+          {serviceItems.map((item) =>
             renderLink(item, item.to.startsWith('http') || item.to.startsWith('mailto')),
           )}
         </List>

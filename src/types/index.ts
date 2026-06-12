@@ -11,11 +11,36 @@ export interface User {
   password: string;
   name: string;
   phone: string;
-  role: 'buyer' | 'seller' | 'admin';
+  role: 'buyer' | 'platform_admin';
+}
+
+export interface Tenant {
+  id: string;
+  subdomain: string;
+  storeName: string;
+  tagline: string;
+  status: 'active' | 'suspended';
+  whatsapp: string;
+  email: string;
+  phone: string;
+  address: string;
+  website: string;
+}
+
+export type TenantRole = 'tenant_admin' | 'seller';
+
+export interface TenantMembership {
+  userId: string;
+  tenantId: string;
+  role: TenantRole;
+  enabled: boolean;
+  createdAt?: string;
+  createdBy?: string;
 }
 
 export interface Product {
   id: string;
+  tenantId: string;
   title: string;
   description: string;
   price: number;
@@ -74,6 +99,34 @@ export interface StoreConfig {
   website: string;
 }
 
+export type ThemeAspect = 'tecnologico' | 'profesional' | 'hacker' | 'custom';
+
+export interface ThemePaletteColors {
+  primaryMain: string;
+  primaryDark?: string;
+  primaryLight?: string;
+  secondaryMain: string;
+  secondaryDark?: string;
+  secondaryLight?: string;
+  backgroundDefault: string;
+  backgroundPaper: string;
+}
+
+export interface ThemePaletteDefinition {
+  id: string;
+  name: string;
+  description: string;
+  aspect: ThemeAspect;
+  builtin: boolean;
+  light: ThemePaletteColors;
+  dark: ThemePaletteColors;
+}
+
+export interface ThemeSettings {
+  activePaletteId: string;
+  customPalettes: ThemePaletteDefinition[];
+}
+
 export interface CartItem {
   product: Product;
   quantity: number;
@@ -84,7 +137,7 @@ export interface AuthUser {
   email: string;
   name: string;
   phone: string;
-  role: 'buyer' | 'seller' | 'admin';
+  role: 'buyer' | 'platform_admin';
 }
 
 export type MessageStatus = 'pendiente' | 'leido' | 'respondido';
@@ -118,6 +171,8 @@ export interface AdminOrder {
 
 export interface Supplier {
   id: string;
+  tenantId?: string;
+  sellerId?: string;
   name: string;
   contact: string;
   email: string;

@@ -2,7 +2,6 @@ import categoriesData from '../data/categories.json';
 import productDetailsData from '../data/productDetails.json';
 import productsData from '../data/products.json';
 import usersData from '../data/users.json';
-import storeData from '../data/store.json';
 import type {
   AuthUser,
   Category,
@@ -14,17 +13,64 @@ import type {
   StoreConfig,
   User,
 } from '../types';
-import { applyProductOverrides, getAdminCreatedProducts, getAdminDetailsEdits } from './adminData';
+import {
+  applyProductOverrides,
+  getAdminCreatedProducts,
+  getAdminDetailsEdits,
+} from './adminData';
+import {
+  getTenantBySlug,
+  tenantToStoreConfig,
+} from './tenantData';
+import {
+  DEFAULT_TENANT_SLUG,
+  getActiveTenantId,
+  getPlatformStorageKey,
+  getTenantStorageKey,
+  resolveTenantSlugFromPath,
+} from './tenantScope';
 
-const PRODUCTS_KEY = 'marlbtime_user_products';
-const USERS_KEY = 'marlbtime_registered_users';
+const USERS_KEY = 'registered_users';
 
-export const storeConfig: StoreConfig = storeData;
 export const categories: Category[] = categoriesData;
-export const baseProducts: Product[] = productsData as Product[];
 export const baseUsers: User[] = usersData as User[];
 
 const productDetailsMap = productDetailsData as Record<string, ProductDetails>;
+
+const SHOP_TENANT_ID = 'tenant-shop';
+
+function assignTenantId(product: Product): Product {
+  if (product.tenantId) return product;
+  return { ...product, tenantId: SHOP_TENANT_ID };
+}
+
+export const baseProducts: Product[] = (productsData as Product[]).map(assignTenantId);
+
+/** @deprecated Usar useTenant().storeConfig en componentes React. */
+export function getStoreConfig(): StoreConfig {
+  if (typeof window === 'undefined') {
+    const tenant = getTenantBySlug(DEFAULT_TENANT_SLUG);
+    return tenant ? tenantToStoreConfig(tenant) : fallbackStoreConfig();
+  }
+  const slug = resolveTenantSlugFromPath(window.location.pathname) ?? DEFAULT_TENANT_SLUG;
+  const tenant = getTenantBySlug(slug);
+  return tenant ? tenantToStoreConfig(tenant) : fallbackStoreConfig();
+}
+
+function fallbackStoreConfig(): StoreConfig {
+  return {
+    storeName: 'Shop',
+    tagline: 'Tu marketplace de tecnología y gaming',
+    whatsapp: '5491123456789',
+    email: 'contacto@marlbtime.com',
+    phone: '(011) 1234-5678',
+    address: 'Av. Corrientes 1234, CABA, Argentina',
+    website: 'shop.marlbtime.com',
+  };
+}
+
+/** Compatibilidad temporal con imports existentes. */
+export const storeConfig = getStoreConfig();
 
 const DEFAULT_REVIEWS: ProductReview[] = [
   {
@@ -36,7 +82,7 @@ const DEFAULT_REVIEWS: ProductReview[] = [
   },
   {
     id: 'default-r2',
-    author: 'Cliente Marlbtime',
+    author: 'Cliente',
     rating: 4,
     comment: 'Buena experiencia de compra. Recomiendo consultar por WhatsApp antes.',
     date: '2026-04-20',
@@ -55,7 +101,7 @@ const DEFAULT_QUESTIONS: ProductQuestion[] = [
   },
   {
     id: 'default-q2',
-    author: 'Usuario Marlbtime',
+    author: 'Usuario',
     question: '¿Hacen envíos al interior del país?',
     answer: 'Sí, coordinamos envío por mensajería o retiro en persona según tu zona.',
     answeredBy: 'Vendedor',
@@ -63,6 +109,36 @@ const DEFAULT_QUESTIONS: ProductQuestion[] = [
     answerDate: '2026-04-06',
   },
 ];
+
+function productsKey(): string {
+  return `user_products`;
+}
+
+function getUserProducts(): Product[] {
+  try {
+    const stored = localStorage.getItem(getTenantStorageKey(productsKey()));
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveUserProducts(products: Product[]): void {
+  localStorage.setItem(getTenantStorageKey(productsKey()), JSON.stringify(products));
+}
+
+function getRegisteredUsers(): User[] {
+  try {
+    const stored = localStorage.getItem(getPlatformStorageKey(USERS_KEY));
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveRegisteredUsers(users: User[]): void {
+  localStorage.setItem(getPlatformStorageKey(USERS_KEY), JSON.stringify(users));
+}
 
 function buildDefaultLongDescription(product: Product, category?: Category): string {
   const conditionText =
@@ -75,42 +151,18 @@ function buildDefaultLongDescription(product: Product, category?: Category): str
   return `${product.description}\n\n${conditionText} ${categoryText} Stock disponible: ${product.stock} unidades.\n\nLas compras se coordinan por WhatsApp o email. Escribinos para consultar formas de pago, envío y garantía antes de confirmar.`;
 }
 
-function getUserProducts(): Product[] {
-  try {
-    const stored = localStorage.getItem(PRODUCTS_KEY);
-    return stored ? JSON.parse(stored) : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveUserProducts(products: Product[]): void {
-  localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
-}
-
-function getRegisteredUsers(): User[] {
-  try {
-    const stored = localStorage.getItem(USERS_KEY);
-    return stored ? JSON.parse(stored) : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveRegisteredUsers(users: User[]): void {
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
-}
-
-export function getAllProducts(): Product[] {
-  return applyProductOverrides([
+export function getAllProducts(tenantId?: string): Product[] {
+  const tid = tenantId ?? getActiveTenantId();
+  const merged = applyProductOverrides([
     ...baseProducts,
     ...getUserProducts(),
     ...getAdminCreatedProducts(),
   ]);
+  return merged.filter((p) => p.tenantId === tid);
 }
 
-export function getProductById(id: string): Product | undefined {
-  return getAllProducts().find((p) => p.id === id);
+export function getProductById(id: string, tenantId?: string): Product | undefined {
+  return getAllProducts(tenantId).find((p) => p.id === id);
 }
 
 export function getProductImages(product: Product): string[] {
@@ -160,7 +212,7 @@ export function getProductDetails(product: Product): ProductDetails {
 }
 
 export function getRelatedProducts(product: Product, limit = 4): Product[] {
-  const candidates = getAllProducts().filter((p) => p.id !== product.id);
+  const candidates = getAllProducts(product.tenantId).filter((p) => p.id !== product.id);
 
   const scored = candidates.map((candidate) => {
     let score = 0;
@@ -190,16 +242,16 @@ export function getRelatedProducts(product: Product, limit = 4): Product[] {
   return selected.slice(0, limit);
 }
 
-export function getProductsByCategory(categoryId: string): Product[] {
-  return getAllProducts().filter((p) => p.categoryId === categoryId);
+export function getProductsByCategory(categoryId: string, tenantId?: string): Product[] {
+  return getAllProducts(tenantId).filter((p) => p.categoryId === categoryId);
 }
 
-export function getFeaturedProducts(): Product[] {
-  return getAllProducts().filter((p) => p.featured);
+export function getFeaturedProducts(tenantId?: string): Product[] {
+  return getAllProducts(tenantId).filter((p) => p.featured);
 }
 
-export function getProductsBySeller(sellerId: string): Product[] {
-  return getAllProducts().filter((p) => p.sellerId === sellerId);
+export function getProductsBySeller(sellerId: string, tenantId?: string): Product[] {
+  return getAllProducts(tenantId).filter((p) => p.sellerId === sellerId);
 }
 
 export function getCategoryBySlug(slug: string): Category | undefined {
@@ -210,19 +262,23 @@ export function getCategoryById(id: string): Category | undefined {
   return categories.find((c) => c.id === id);
 }
 
-export function searchProducts(query: string): Product[] {
+export function searchProducts(query: string, tenantId?: string): Product[] {
   const normalized = query.toLowerCase().trim();
-  if (!normalized) return getAllProducts();
-  return getAllProducts().filter(
+  const all = getAllProducts(tenantId);
+  if (!normalized) return all;
+  return all.filter(
     (p) =>
       p.title.toLowerCase().includes(normalized) ||
       p.description.toLowerCase().includes(normalized),
   );
 }
 
+export function getAllUsers(): User[] {
+  return [...baseUsers, ...getRegisteredUsers()];
+}
+
 export function loginUser(email: string, password: string): AuthUser | null {
-  const allUsers = [...baseUsers, ...getRegisteredUsers()];
-  const user = allUsers.find((u) => u.email === email && u.password === password);
+  const user = getAllUsers().find((u) => u.email === email && u.password === password);
   if (!user) return null;
   return { id: user.id, email: user.email, name: user.name, phone: user.phone, role: user.role };
 }
@@ -232,16 +288,15 @@ export function registerUser(data: {
   email: string;
   password: string;
   phone: string;
-  role: 'buyer' | 'seller';
 }): { success: boolean; error?: string; user?: AuthUser } {
-  const allUsers = [...baseUsers, ...getRegisteredUsers()];
-  if (allUsers.some((u) => u.email === data.email)) {
+  if (getAllUsers().some((u) => u.email === data.email)) {
     return { success: false, error: 'El email ya está registrado' };
   }
 
   const newUser: User = {
     id: `user-${Date.now()}`,
     ...data,
+    role: 'buyer',
   };
 
   const registered = getRegisteredUsers();
@@ -260,11 +315,10 @@ export function registerUser(data: {
   };
 }
 
-export function createProduct(
-  product: Omit<Product, 'id' | 'createdAt'>,
-): Product {
+export function createProduct(product: Omit<Product, 'id' | 'createdAt'>): Product {
   const newProduct: Product = {
     ...product,
+    tenantId: product.tenantId ?? getActiveTenantId(),
     id: `prod-${Date.now()}`,
     createdAt: new Date().toISOString(),
   };
@@ -302,15 +356,15 @@ export function getDiscountPercent(product: Product): number {
   return Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
 }
 
-export function getUsedProducts(): Product[] {
-  return getAllProducts().filter((p) => p.condition === 'usado');
+export function getUsedProducts(tenantId?: string): Product[] {
+  return getAllProducts(tenantId).filter((p) => p.condition === 'usado');
 }
 
-export function getOfferProducts(): Product[] {
-  return getAllProducts().filter((p) => p.featured || hasProductOffer(p));
+export function getOfferProducts(tenantId?: string): Product[] {
+  return getAllProducts(tenantId).filter((p) => p.featured || hasProductOffer(p));
 }
 
-export function buildWhatsAppLink(message: string): string {
-  const phone = storeConfig.whatsapp.replace(/\D/g, '');
+export function buildWhatsAppLink(message: string, whatsapp?: string): string {
+  const phone = (whatsapp ?? getStoreConfig().whatsapp).replace(/\D/g, '');
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }

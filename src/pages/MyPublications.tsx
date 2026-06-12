@@ -15,9 +15,11 @@ import { useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { useAuth } from '../contexts/AuthContext';
 import { deleteProduct, getProductsBySeller } from '../services/mockData';
+import { useTenantPath } from '../hooks/useTenantPath';
 
 export default function MyPublications() {
   const { user } = useAuth();
+  const { tp } = useTenantPath();
   const [products, setProducts] = useState(() =>
     user ? getProductsBySeller(user.id) : [],
   );
@@ -45,7 +47,7 @@ export default function MyPublications() {
           variant="contained"
           startIcon={<AddIcon />}
           component={Link}
-          to="/publicar"
+          to={tp('/publicar')}
         >
           Nueva publicación
         </Button>
@@ -54,7 +56,7 @@ export default function MyPublications() {
       {products.length === 0 ? (
         <Alert severity="info">
           Todavía no tenés publicaciones.{' '}
-          <Typography component={Link} to="/publicar" color="primary">
+          <Typography component={Link} to={tp('/publicar')} color="primary">
             Publicá tu primer producto
           </Typography>
         </Alert>

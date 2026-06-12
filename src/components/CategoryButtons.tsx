@@ -1,8 +1,10 @@
 import { Button, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useTenantPath } from '../hooks/useTenantPath';
 import { categories } from '../services/mockData';
 
 export default function CategoryButtons() {
+  const { tp } = useTenantPath();
   return (
     <Stack direction="row" flexWrap="wrap" gap={1.5} sx={{ mb: 5 }}>
       {categories.map((cat) => (
@@ -10,7 +12,7 @@ export default function CategoryButtons() {
           key={cat.id}
           variant="contained"
           component={Link}
-          to={`/categoria/${cat.slug}`}
+          to={tp(`/categoria/${cat.slug}`)}
           sx={{
             flex: {
               xs: '1 1 calc(50% - 6px)',

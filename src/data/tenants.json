@@ -1,0 +1,14 @@
+[
+  {
+    "id": "tenant-shop",
+    "subdomain": "shop",
+    "storeName": "Shop",
+    "tagline": "Tu marketplace de tecnología y gaming",
+    "status": "active",
+    "whatsapp": "5491123456789",
+    "email": "contacto@marlbtime.com",
+    "phone": "(011) 1234-5678",
+    "address": "Av. Corrientes 1234, CABA, Argentina",
+    "website": "shop.marlbtime.com"
+  }
+]

@@ -26,10 +26,12 @@ import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import ProductImage from '../components/ProductImage';
 import { buildWhatsAppLink, formatPrice, storeConfig } from '../services/mockData';
+import { useTenantPath } from '../hooks/useTenantPath';
 
 export default function Cart() {
   const { items, removeFromCart, updateQuantity, totalPrice, clearCart } = useCart();
   const { user } = useAuth();
+  const { tp } = useTenantPath();
   const [notes, setNotes] = useState('');
   const [sent, setSent] = useState(false);
   const [orderMessage, setOrderMessage] = useState('');
@@ -68,7 +70,7 @@ export default function Cart() {
           <Typography variant="h5" gutterBottom>
             Tu carrito está vacío
           </Typography>
-          <Button component={Link} to="/productos" variant="contained" sx={{ mt: 2 }}>
+          <Button component={Link} to={tp('/productos')} variant="contained" sx={{ mt: 2 }}>
             Ver productos
           </Button>
         </Box>
@@ -105,7 +107,7 @@ export default function Cart() {
               Enviar por Email
             </Button>
           </Stack>
-          <Button component={Link} to="/productos" sx={{ mt: 3 }}>
+          <Button component={Link} to={tp('/productos')} sx={{ mt: 3 }}>
             Seguir comprando
           </Button>
         </Paper>

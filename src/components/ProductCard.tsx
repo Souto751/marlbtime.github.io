@@ -17,12 +17,15 @@ interface ProductCardProps {
   product: Product;
 }
 
+import { useTenantPath } from '../hooks/useTenantPath';
+
 export default function ProductCard({ product }: ProductCardProps) {
   const category = getCategoryById(product.categoryId);
+  const { tp } = useTenantPath();
 
   return (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <CardActionArea component={Link} to={`/producto/${product.id}`} sx={{ flex: 1 }}>
+      <CardActionArea component={Link} to={tp(`/producto/${product.id}`)} sx={{ flex: 1 }}>
         <Box sx={{ position: 'relative' }}>
           <ProductBadgesOverlay product={product} />
           <ProductImage src={product.image} alt={product.title} height={180} />

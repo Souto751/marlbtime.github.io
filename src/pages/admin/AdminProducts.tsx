@@ -21,10 +21,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { formatPrice, getAllProducts, getCategoryById } from '../../services/mockData';
+import { useTenantPath } from '../../hooks/useTenantPath';
 import { AdminPageHeader, AdminScrollTable, adminResponsiveTable } from './adminUi';
 
 export default function AdminProducts() {
   const [search, setSearch] = useState('');
+  const { tp } = useTenantPath();
 
   const products = useMemo(() => getAllProducts(), []);
 
@@ -66,7 +68,7 @@ export default function AdminProducts() {
               variant="contained"
               startIcon={<AddIcon />}
               component={Link}
-              to="/admin/productos/nuevo"
+              to={tp('/admin/productos/nuevo')}
               sx={{ whiteSpace: 'nowrap' }}
             >
               Nuevo producto
@@ -115,7 +117,7 @@ export default function AdminProducts() {
                     <IconButton
                       size="small"
                       component={Link}
-                      to={`/admin/productos/${product.id}`}
+                      to={tp(`/admin/productos/${product.id}`)}
                       aria-label="Editar"
                     >
                       <EditOutlinedIcon fontSize="small" />
@@ -123,7 +125,7 @@ export default function AdminProducts() {
                     <IconButton
                       size="small"
                       component={Link}
-                      to={`/producto/${product.id}`}
+                      to={tp(`/producto/${product.id}`)}
                       target="_blank"
                       aria-label="Ver en tienda"
                     >
@@ -158,7 +160,7 @@ export default function AdminProducts() {
                 size="small"
                 variant="contained"
                 component={Link}
-                to={`/admin/productos/${product.id}`}
+                to={tp(`/admin/productos/${product.id}`)}
                 fullWidth
               >
                 Editar
@@ -167,7 +169,7 @@ export default function AdminProducts() {
                 size="small"
                 variant="outlined"
                 component={Link}
-                to={`/producto/${product.id}`}
+                to={tp(`/producto/${product.id}`)}
                 target="_blank"
                 fullWidth
               >

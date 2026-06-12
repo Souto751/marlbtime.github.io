@@ -12,10 +12,10 @@ interface AuthContextValue {
     email: string;
     password: string;
     phone: string;
-    role: 'buyer' | 'seller';
   }) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   isAuthenticated: boolean;
+  isPlatformAdmin: boolean;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -52,13 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [persistUser]);
 
   const register = useCallback(
-    async (data: {
-      name: string;
-      email: string;
-      password: string;
-      phone: string;
-      role: 'buyer' | 'seller';
-    }) => {
+    async (data: { name: string; email: string; password: string; phone: string }) => {
       await new Promise((r) => setTimeout(r, 400));
       const result = registerUser(data);
       if (!result.success || !result.user) {
@@ -81,6 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       register,
       logout,
       isAuthenticated: !!user,
+      isPlatformAdmin: user?.role === 'platform_admin',
     }),
     [user, login, register, logout],
   );

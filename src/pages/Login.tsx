@@ -12,12 +12,14 @@ import LoginIcon from '@mui/icons-material/Login';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useTenantPath } from '../hooks/useTenantPath';
 
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as { from?: string })?.from || '/';
+  const { tp, home } = useTenantPath();
+  const from = (location.state as { from?: string })?.from || home;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -54,9 +56,9 @@ export default function Login() {
           {error && <Alert severity="error">{error}</Alert>}
 
           <Alert severity="info" variant="outlined">
-            Demo: <strong>demo@marlbtime.com</strong> / <strong>123456</strong> (comprador),{' '}
-            <strong>vendedor@marlbtime.com</strong> / <strong>123456</strong> (vendedor) o{' '}
-            <strong>admin@marlbtime.com</strong> / <strong>123456</strong> (administrador)
+            Demo Shop: <strong>demo@marlbtime.com</strong> / <strong>123456</strong> (comprador),{' '}
+            <strong>vendedor@marlbtime.com</strong> / <strong>123456</strong> (vendedor habilitado),{' '}
+            <strong>admin@marlbtime.com</strong> / <strong>123456</strong> (plataforma + admin tienda)
           </Alert>
 
           <Box component="form" onSubmit={handleSubmit}>
@@ -85,7 +87,7 @@ export default function Login() {
 
           <Typography textAlign="center" variant="body2">
             ¿No tenés cuenta?{' '}
-            <Typography component={Link} to="/registro" color="primary" variant="body2">
+            <Typography component={Link} to={tp('/registro')} color="primary" variant="body2">
               Registrate acá
             </Typography>
           </Typography>
